@@ -22,8 +22,25 @@ class Customer extends CI_Controller {
 	    
 	    $post = $this->input->post();
 
-		debug($post);
-		
+		//debug($post);
+
+		$ins['full_name'] = $post['full_name'];
+		$ins['email'] = $post['email'];
+		$ins['gsm'] = $post['gsm'];
+		$ins['birthday'] = $post['birthday'];
+		$ins['gender'] = $post['gender'];
+
+		$this->db->insert('customer_table', $ins);
+
+		if($this->db->affected_rows() > 0){
+			echo 'success';
+			die();
+		}
+
+		echo 'error';
+
+
+
 	}
 	
 }

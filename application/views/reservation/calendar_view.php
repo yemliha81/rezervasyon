@@ -107,28 +107,20 @@
     <div>
       <div>
         <label for="m_0" class="customer" onclick="showCustomerForm()">
-            <input type="radio"  name="customer_id" id="m_0" class=""> Yeni Müşteri Ekle
+            <input type="radio"  name="customer_id" id="m_0" value="0"> Yeni Müşteri Ekle
         </label>
       </div>
-      <div>
-        <label for="m_1" class="customer">
-            <input type="radio" name="customer_id" id="m_1" class=""> Yemliha Demirdelen
-        </label>
-      </div>
-      <div>
-        <label for="m_2" class="customer">
-            <input type="radio" name="customer_id" id="m_2" class=""> Yemliha Demirdelen 2
-        </label>
-      </div>
-      <div>
-        <label for="m_3" class="customer">
-            <input type="radio" name="customer_id" id="m_3" class=""> Yemliha Demirdelen 3
-        </label>
-      </div>
+      <?php foreach($customers as $customer){ ?>
+        <div>
+          <label for="m_<?php echo $customer['id'];?>" class="customer">
+              <input type="radio" name="customer_id" id="m_<?php echo $customer['id'];?>" class="" value="<?php echo $customer['id'];?>"> <?php echo $customer['full_name'];?>
+          </label>
+        </div>
+      <?php } ?>
     </div>
     <div>Kişi Sayısı</div>
     <div>
-      <select class="inp" name="person" id="">
+      <select class="inp person" name="person" id="">
         <?php for($i=1; $i<=20; $i++){ ?>
           <option value="<?php echo $i;?>"><?php echo $i;?></option>
         <?php } ?>
@@ -143,7 +135,7 @@
       <input class="inp end" type="datetime-local">
     </div>
     <div>
-      <a class="small-btn bg-blue" href="">Ekle</a> <a class="small-btn bg-gray" href="">Kapat</a>
+      <a class="small-btn bg-blue" href="javascript:;" onclick="saveReservation()">Ekle</a> <a class="small-btn bg-gray" href="javascript:;" onclick="closeModal()">Kapat</a>
     </div>
 
     <div class="customerForm hidden">
@@ -171,7 +163,11 @@
         </select>
       </div>
       <div>
-        <a href="javascript:;" class="small-btn bg-blue" onclick="saveCustomer()">Kaydet</a>
+        <hr>
+      </div>
+      <div>
+        <a href="javascript:;" class="small-btn bg-blue" onclick="saveCustomer()">Kaydet</a> 
+        <a href="javascript:;" class="small-btn bg-gray" onclick="hideCustomerForm()">Kapat</a> 
       </div>
     </div>
   </div>
@@ -186,8 +182,7 @@
 
 $(document).ready(function() {
   $(function () {
-        var events =
-            [{"id":"121261","title":"1 - Abdullah - 05439204041","start":"2023-12-15 20:00:00","end":"2023-12-15 23:00:00","color":"#28a745"},{"id":"657912","title":"1 - Yi\u011fit Oru\u00e7 - 05433411481","start":"2023-04-30 20:00:00","end":"2023-04-30 23:00:00","color":"#dc3545"},{"id":"664897","title":"1 - Osman Demirci - 05535787745","start":"2023-06-17 20:00:00","end":"2023-06-17 23:00:00","color":"#dc3545"},{"id":"728859","title":"1 - Do\u011fu\u015f Derman - 05462063911","start":"2023-07-21 20:00:00","end":"2023-07-21 23:00:00","color":"#dc3545"},{"id":"855896","title":"1 - Abdullah - 05439204041","start":"2023-07-21 20:00:00","end":"2023-07-21 23:00:00","color":"#dc3545"},{"id":"982317","title":"1 - Osman Demirci - 05535787745","start":"2023-06-17 20:00:00","end":"2023-06-17 23:00:00","color":"#dc3545"},{"id":"147075","title":"2 - Sinem Kayaba\u015f - 0536 603 11 94","start":"2023-05-05 20:00:00","end":"2023-05-05 23:00:00","color":"#dc3545"},{"id":"150552","title":"2 - Fatmanur Sezen - 05397257645","start":"2023-06-09 20:00:00","end":"2023-06-09 23:00:00","color":"#dc3545"},{"id":"157129","title":"2 - Yusuf Atmaca - 05354505426","start":"2023-05-06 20:00:00","end":"2023-05-06 23:00:00","color":"#dc3545"},{"id":"175979","title":"2 - \u0130rem Saltan - 05434310450","start":"2023-05-05 20:00:00","end":"2023-05-05 23:00:00","color":"#dc3545"},{"id":"231379","title":"2 - Bahad\u0131r Cansever - 05384810601","start":"2023-05-06 20:00:00","end":"2023-05-06 23:00:00","color":"#dc3545"},{"id":"253961","title":"2 - Ezgi Keskin  - 05300948562","start":"2023-05-06 20:00:00","end":"2023-05-06 23:00:00","color":"#dc3545"},{"id":"277017","title":"2 - \u00d6mer Fidan - 05426496481","start":"2023-05-20 20:00:00","end":"2023-05-20 23:00:00","color":"#dc3545"},{"id":"278606","title":"2 - Fuat S\u00fcrer - +90 (505) 824 67 38","start":"2023-07-21 20:00:00","end":"2023-07-21 23:00:00","color":"#dc3545"},{"id":"281554","title":"2 - Ay\u015feg\u00fcl \u00d6zt\u00fcrk - +90 (554) 916 57 82","start":"2023-07-21 20:00:00","end":"2023-07-21 23:00:00","color":"#dc3545"},{"id":"339039","title":"2 - Gizem Y\u0131ld\u0131z - 05061249656","start":"2023-05-16 20:00:00","end":"2023-05-16 23:00:00","color":"#dc3545"},{"id":"357782","title":"2 - Orkun Ayd\u0131n - 05322933881","start":"2023-05-06 20:00:00","end":"2023-05-06 23:00:00","color":"#dc3545"},{"id":"357866","title":"2 - Volkan Berbero\u011flu - 05334137676","start":"2023-05-07 20:00:00","end":"2023-05-07 23:00:00","color":"#dc3545"},{"id":"403586","title":"2 - Gizem Y\u0131ld\u0131z - 05061249656","start":"2023-05-16 20:00:00","end":"2023-05-16 23:00:00","color":"#dc3545"},{"id":"456739","title":"2 - \u00d6mer Fidan - 05426496481","start":"2023-05-20 20:00:00","end":"2023-05-20 23:00:00","color":"#dc3545"},{"id":"467950","title":"2 - Deniz Ate\u015f - \u202a+90\u00a0531\u00a0080\u00a066\u00a025\u202c","start":"2023-09-22 20:00:00","end":"2023-09-22 23:00:00","color":"#dc3545"}]        ;
+        
         $('#calendar').fullCalendar({
             selectable: true,
             selectHelper: true,
@@ -197,7 +192,7 @@ $(document).ready(function() {
                 center: 'title',
                 right: 'month,listWeek'
             },
-            events: events,
+            events: <?php echo $events;?>,
 
             eventRender: function (event, element) {
                 element.attr('href', 'javascript:void(0);');
@@ -240,8 +235,16 @@ function openModal(){
   $('.modal').css('display', 'flex');
 }
 
+function closeModal(){
+  $('.modal').fadeOut();
+}
+
 function showCustomerForm(){
   $('.customerForm').removeClass('hidden');
+}
+
+function hideCustomerForm(){
+  $('.customerForm').addClass('hidden');
 }
 
 function saveCustomer(){
@@ -255,7 +258,24 @@ function saveCustomer(){
       type: "POST",
       data: {full_name: full_name, email: email, birthday: birthday, gender: gender, gsm: gsm},
       success: function (resopnse) {
-          console.log(response)
+          if(response == "success"){
+            
+          }
+      }
+  })
+}
+
+function saveReservation(){
+  const customer_id = $('input[name=customer_id]:checked').val();
+  const person = $('.person').val();
+  const start = $('.start').val();
+  const end = $('.end').val();
+  $.ajax({
+      url: "<?php echo SAVE_RESERVATION_POST;?>",
+      type: "POST",
+      data: {customer_id: customer_id, person: person, start: start, end: end},
+      success: function (resopnse) {
+        location.reload();
       }
   })
 }

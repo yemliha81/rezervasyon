@@ -91,3 +91,4 @@ define( 'LOGOUT', FATHER_BASE.'login/logout/' );
 
 define( 'SAVE_CUSTOMER_POST', FATHER_BASE.'customer/save_customer_post/' );
 define( 'RESERVATION_CALENDAR', FATHER_BASE.'reservation/calendar/' );
+define( 'SAVE_RESERVATION_POST', FATHER_BASE.'reservation/save_reservation_post/' );
