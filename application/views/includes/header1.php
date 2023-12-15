@@ -25,6 +25,7 @@
     <link href="<?php echo FATHER_BASE;?>template/css/morris.css" rel="stylesheet">
     <link href="<?php echo FATHER_BASE;?>template/css/style.css" rel="stylesheet">
     <link href="<?php echo FATHER_BASE;?>template/css/dropify.css" rel="stylesheet">
+    <link href="<?php echo FATHER_BASE;?>template/css/fullCalendar.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="<?php echo FATHER_BASE;?>template/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -63,6 +64,7 @@
             align-items: center;
             grid-template-columns:250px auto 300px;
             gap:20px;
+            height:80px;
 		}
 		.search-div{
             display: grid;

@@ -14,6 +14,7 @@ public function __construct()
 	public function index()
 	{
         $data['menu'] = '1';
+        
 		$this->load->view('dashboard', $data);
 	}
 	public function stats()
