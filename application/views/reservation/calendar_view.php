@@ -10,6 +10,11 @@
     .lnr-upload{
         font-size: 50px;
     }
+    .card{
+      background:#FFFFFF;
+      padding:20px;
+      border-radius:15px;
+    }
     .menu-form{
         display:grid;
         grid-template-columns:250px auto;
@@ -87,12 +92,22 @@
     .hidden{
       display:none;
     }
+    .fc-sat{
+      background:#00ad5f;
+      color:#FFFFFF;
+    }
+    .fc-sun{
+      color: white !important;
+      background: #035b34 !important;
+    }
 </style>
 <div class="x-content">
     <?php include(APPPATH.'views/includes/left_nav1.php');?>
 
     <div class="page-content">
+      <div class="card">
         <div id='calendar'></div>
+      </div>
     </div>
 </div>
 <div class="modal">
@@ -259,7 +274,7 @@ function saveCustomer(){
       data: {full_name: full_name, email: email, birthday: birthday, gender: gender, gsm: gsm},
       success: function (resopnse) {
           if(response == "success"){
-            
+            location.reload()
           }
       }
   })
@@ -274,8 +289,13 @@ function saveReservation(){
       url: "<?php echo SAVE_RESERVATION_POST;?>",
       type: "POST",
       data: {customer_id: customer_id, person: person, start: start, end: end},
-      success: function (resopnse) {
-        location.reload();
+      success: function (response) {
+        //location.reload();
+        if(response == 'success'){
+          location.reload();
+        }else{
+          alert('Hata oluştu!')
+        }
       }
   })
 }

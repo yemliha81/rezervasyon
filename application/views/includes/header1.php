@@ -65,6 +65,7 @@
             grid-template-columns:250px auto 300px;
             gap:20px;
             height:80px;
+            padding:10px;
 		}
 		.search-div{
             display: grid;

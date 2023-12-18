@@ -34,10 +34,33 @@ class Reservation extends CI_Controller {
 		$this->load->view('reservation/calendar_view', $data);
 	}
 
+    public function date_format($datetime){
+
+        $hour = explode('T', $datetime)[1];
+        
+        $time = strtotime($datetime);
+
+        $fmt = datefmt_create(
+            'tr_TR',
+            IntlDateFormatter::FULL,
+            IntlDateFormatter::FULL,
+            'Europe/Istanbul',
+            IntlDateFormatter::GREGORIAN,
+            'dd MMMM Y'
+        );
+        return datefmt_format($fmt,  $time)." ".$hour;
+      
+    }
+
     public function save_reservation_post()
 	{
+        require DOC_ROOT . 'sms/Sms.php';
 	    
 	    $post = $this->input->post();
+
+        $customer = $this->db->select('*')
+            ->where('id', $post['customer_id'])
+            ->get('customer_table')->row_array();
 
 		//debug($post);
 
@@ -46,16 +69,29 @@ class Reservation extends CI_Controller {
 		$ins['start'] = $post['start'];
 		$ins['end'] = $post['end'];
 
+        //debug($this->date_format($post['start']));
+
 		$this->db->insert('reservation_table', $ins);
 
 		if($this->db->affected_rows() > 0){
-			echo 'success';
-			die();
-		}
+			//echo 'success';
+            $id = $this->db->insert_id();
 
-		echo 'error';
+            $to = ($customer['gsm'][0]) == 0 ? "9".$customer['gsm'] : "90".$customer['gsm'];
+            //debug($to);
+            $sms_text = "Sayın ".$customer['full_name'].", ".$this->date_format($post['start'])." tarihli ". $post['person'] . " kişilik rezervasyonunuz oluşturulmuştur. Detay için ".$_ENV['BASE_URL']."kurallar/".$id." adresini ziyaret edebilirsiniz.";
 
+            $sms = new Sms($to, $sms_text);
+            $campaign_id = $sms->send_sms();
 
+            if($campaign_id === false)
+                echo "Mesaj gonderme basarisiz.\n";
+            else
+                echo "success";
+			
+		}else{
+            echo 'db error';
+        }
 
 	}
 	
