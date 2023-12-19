@@ -34,8 +34,7 @@
 					<div class="rests">
 					    <div class="top-ttl">
     							<div class="r_ttl" >
-    								<div class="ttl">Sosyal Medya Hesapları</div>
-    								<a href="<?php echo ADD_SOCIAL_MEDIA.$c_id;?>" class="btn_custom"><span class="lnr lnr-plus-circle"></span>Yeni Hesap Ekle</a>
+    								<div class="ttl">Müşteri Listesi</div>
     							</div>
     							
     						</div>
@@ -43,7 +42,7 @@
 							<div class="menu-div">
 								<div class="m-left">
 								    <div class="num"><?php echo (($page-1)*(20))+$key+1;?></div>
-    								<div class="m_img">
+    								<div class="">
     									<?php echo $customer['full_name'];?>
     								</div>
     								<div class="r_zone">
@@ -53,7 +52,7 @@
 								
 								<div class="conf">
 								
-								    <a class="configure" href="<?php echo UPDATE_CUSTOMER.$customer['id'];?>" class="btn btn-xs btn-info">
+								    <a class="configure" href="javascript:;" class="btn btn-xs btn-info">
 									<span class="lnr lnr-cog"></span> Düzenle
 									</a>
 									<a href="javascript:;" class="delete_menu" id="<?php echo $customer['id'];?>">
@@ -66,13 +65,13 @@
 							
 						</div>
 					</div>
-					<div style='padding:20px;text-align:center;'>
+					<!--<div style='padding:20px;text-align:center;'>
 					    <?php for($i=1; $i<=$total; $i++){ ?>
 					    
-					        <a class='page <?php if($page == $i){ echo 'act'; }?>' href='<?php echo SOCIAL_MEDIA_LIST.$c_id;?>?page=<?php echo $i;?>'><?php echo $i;?></a>
+					        <a class='page <?php if($page == $i){ echo 'act'; }?>' href='<?php echo CUSTOMER_LIST.$c_id;?>?page=<?php echo $i;?>'><?php echo $i;?></a>
 					    
 					    <?php } ?>
-					</div>
+					</div>-->
 				</div>
         </div>
     </div>

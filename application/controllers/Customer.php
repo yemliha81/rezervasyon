@@ -18,6 +18,8 @@ class Customer extends CI_Controller {
     }
 
 	public function customer_list(){
+		$data['menu'] = '3';
+		$data['total'] = 1;
 		$data['page'] = 1;
 		$data['customers'] = $this->db->select('*')
 			->get('customer_table')->result_array();
