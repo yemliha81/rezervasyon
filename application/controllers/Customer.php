@@ -43,7 +43,7 @@ class Customer extends CI_Controller {
 		$this->db->insert('customer_table', $ins);
 
 		if($this->db->affected_rows() > 0){
-			echo 'success';
+			echo $this->db->insert_id();
 			die();
 		}
 

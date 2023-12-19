@@ -40,16 +40,30 @@
       right:0;
       background:#00000080;
     }
+    .modalHeader{
+      padding: 20px;
+      background: #f3f3f3;
+      font-weight: bold;
+      font-size:18px;
+    }
+    .modalInner{
+      display:flex;
+      flex-direction:column;
+      background:#FFFFFF;
+      width:350px;
+      border-radius:10px;
+      overflow:hidden;
+      position:relative;
+      z-index: 1;
+    }
     .modalContent{
       padding:20px;
       display:flex;
       flex-direction:column;
       gap:10px;
       background:#FFFFFF;
-      width:350px;
-      border-radius:10px;
+      width:100%;
       position:relative;
-      z-index: 1;
     }
     .customerForm{
       position:absolute;
@@ -62,6 +76,7 @@
       flex-direction:column;
       z-index: 2;
       background:#FFFFFF;
+      gap:10px;
     }
     .inp{
       width:100%;
@@ -100,6 +115,12 @@
       color: white !important;
       background: #035b34 !important;
     }
+    .customerList{
+      max-height: 150px;
+      overflow: auto;
+      background: #f3f3f3;
+      padding: 5px;
+    }
 </style>
 <div class="x-content">
     <?php include(APPPATH.'views/includes/left_nav1.php');?>
@@ -111,81 +132,88 @@
     </div>
 </div>
 <div class="modal">
-  <div class="modalContent">
-    <div>
-      Rezervasyon Ekle
+  <div class="modalInner">
+    <div class="modalHeader">
+      <span class="header1">Rezervasyon Ekle</span>
+      <span class="header2 hidden">Kişi Ekle</span>
     </div>
-    <div>Müşteri <span class="customer_name"></span></div>
-    <div>
-      <input class="inp" type="text" placeholder="Müşteri ara"/>
-    </div>
-    <div>
+    <div class="modalContent">
+      
+      <div>Müşteri: <span class="customer_name"></span></div>
       <div>
-        <label for="m_0" class="customer" onclick="showCustomerForm()">
-            <input type="radio"  name="customer_id" id="m_0" value="0"> Yeni Müşteri Ekle
-        </label>
+        <input class="inp searchCustomer" type="text" placeholder="Müşteri ara"/>
       </div>
-      <?php foreach($customers as $customer){ ?>
+      <div>
         <div>
-          <label for="m_<?php echo $customer['id'];?>" class="customer">
-              <input type="radio" name="customer_id" id="m_<?php echo $customer['id'];?>" class="" value="<?php echo $customer['id'];?>"> <?php echo $customer['full_name'];?>
+          <label for="m_0" class="customer" onclick="showCustomerForm()">
+              <input type="radio"  name="customer_id" id="m_0" value="0"> Yeni Müşteri Ekle
           </label>
         </div>
-      <?php } ?>
-    </div>
-    <div>Kişi Sayısı</div>
-    <div>
-      <select class="inp person" name="person" id="">
-        <?php for($i=1; $i<=20; $i++){ ?>
-          <option value="<?php echo $i;?>"><?php echo $i;?></option>
-        <?php } ?>
-      </select>
-    </div>
-    <div>Başlangıç</div>
-    <div>
-      <input class="inp start" type="datetime-local">
-    </div>
-    <div>Bitiş</div>
-    <div>
-      <input class="inp end" type="datetime-local">
-    </div>
-    <div>
-      <a class="small-btn bg-blue" href="javascript:;" onclick="saveReservation()">Ekle</a> <a class="small-btn bg-gray" href="javascript:;" onclick="closeModal()">Kapat</a>
-    </div>
-
-    <div class="customerForm hidden">
-      <div>
-        <label for="">Adı Soyadı</label>
-        <input type="text" name="full_name" class="inp full_name" placeholder="">
+        <div class="customerList">
+          <?php foreach($customers as $customer){ ?>
+            <div class="customerName" name="<?php echo $customer['full_name'];?>">
+              <label for="m_<?php echo $customer['id'];?>" class="customer">
+                  <input type="radio" name="customer_id" id="m_<?php echo $customer['id'];?>" val="<?php echo $customer['full_name'];?>" class="customer_id" value="<?php echo $customer['id'];?>"> <?php echo $customer['full_name'];?>
+              </label>
+            </div>
+          <?php } ?>
+        </div>
       </div>
+      <div>Kişi Sayısı</div>
       <div>
-        <label for="">Telefon</label>
-        <input type="text" name="gsm" class="inp gsm" placeholder="">
-      </div>
-      <div>
-        <label for="">E-mail</label>
-        <input type="text" name="email" class="inp email" placeholder="">
-      </div>
-      <div>
-        <label for="">Doğum Tarihi</label>
-        <input type="date"  name="birthday" class="inp birthday" placeholder="">
-      </div>
-      <div>
-        <label for="">Cinsiyet</label>
-        <select class="inp gender" name="gender" id="">
-          <option value="Erkek">Erkek</option>
-          <option value="Kadın">Kadın</option>
+        <select class="inp person" name="person" id="">
+          <?php for($i=1; $i<=20; $i++){ ?>
+            <option value="<?php echo $i;?>"><?php echo $i;?></option>
+          <?php } ?>
         </select>
       </div>
+      <div>Başlangıç</div>
       <div>
-        <hr>
+        <input class="inp start" type="datetime-local">
+      </div>
+      <div>Bitiş</div>
+      <div>
+        <input class="inp end" type="datetime-local">
       </div>
       <div>
-        <a href="javascript:;" class="small-btn bg-blue" onclick="saveCustomer()">Kaydet</a> 
-        <a href="javascript:;" class="small-btn bg-gray" onclick="hideCustomerForm()">Kapat</a> 
+        <a class="small-btn bg-blue" href="javascript:;" onclick="saveReservation()">Ekle</a> <a class="small-btn bg-gray" href="javascript:;" onclick="closeModal()">Kapat</a>
+      </div>
+
+      <div class="customerForm hidden">
+        <div>
+          <label for="">Adı Soyadı</label>
+          <input type="text" name="full_name" class="inp full_name" placeholder="">
+        </div>
+        <div>
+          <label for="">Telefon</label>
+          <input type="text" name="gsm" class="inp gsm" placeholder="">
+        </div>
+        <div>
+          <label for="">E-mail</label>
+          <input type="text" name="email" class="inp email" placeholder="">
+        </div>
+        <div>
+          <label for="">Doğum Tarihi</label>
+          <input type="date"  name="birthday" class="inp birthday" placeholder="">
+        </div>
+        <div>
+          <label for="">Cinsiyet</label>
+          <select class="inp gender" name="gender" id="">
+            <option value="Erkek">Erkek</option>
+            <option value="Kadın">Kadın</option>
+          </select>
+        </div>
+        <div>
+          <hr>
+        </div>
+        <div>
+          <a href="javascript:;" class="small-btn bg-blue" onclick="saveCustomer()">Kaydet</a> 
+          <a href="javascript:;" class="small-btn bg-gray" onclick="hideCustomerForm()">Kapat</a> 
+        </div>
       </div>
     </div>
   </div>
+ 
 </div>
 
 <?php include(APPPATH.'views/includes/footer.php');?>
@@ -256,10 +284,15 @@ function closeModal(){
 
 function showCustomerForm(){
   $('.customerForm').removeClass('hidden');
+  $('.header1').addClass('hidden');
+  $('.header2').removeClass('hidden');
+  $('.customer_name').text('')
 }
 
 function hideCustomerForm(){
   $('.customerForm').addClass('hidden');
+  $('.header2').addClass('hidden');
+  $('.header1').removeClass('hidden');
 }
 
 function saveCustomer(){
@@ -272,9 +305,17 @@ function saveCustomer(){
       url: "<?php echo SAVE_CUSTOMER_POST;?>",
       type: "POST",
       data: {full_name: full_name, email: email, birthday: birthday, gender: gender, gsm: gsm},
-      success: function (resopnse) {
-          if(response == "success"){
-            location.reload()
+      success: function (response) {
+          if(parseInt(response) >= 1){
+            const new_customer = '<div class="customerName" name="'+full_name+'">\
+                                  <label for="m_'+response+'" class="customer">\
+                                      <input type="radio" name="customer_id" id="m_'+response+'"\
+                                      val="'+full_name+'" class="customer_id" \
+                                      value="'+response+'"> '+full_name+'\
+                                  </label>\
+                                </div>'
+            hideCustomerForm()
+            $('.customerList').prepend(new_customer)
           }
       }
   })
@@ -299,5 +340,16 @@ function saveReservation(){
       }
   })
 }
+
+$(document).on('change','.customer_id', function(){
+  $('.customer_name').text($(this).attr('val'))
+})
+
+$(".searchCustomer").on("keyup", function() {
+  var value = $(this).val().toLowerCase();
+  $(".customerList .customerName").filter(function() {
+    $(this).toggle($(this).attr('name').toLowerCase().indexOf(value) > -1)
+  });
+});
 
 </script>
