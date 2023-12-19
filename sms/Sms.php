@@ -14,12 +14,6 @@ class Sms{
 	
 	public function send_sms(){
 
-        /* echo '<pre>';
-        print_r($this->to);
-        print_r($this->sms_text);
-
-        die(); */
-
         $sms_msg = array(
             "username" => "908502422125", // https://oim.verimor.com.tr/sms_settings/edit adresinden öğrenebilirsiniz.
             "password" => "968574", // https://oim.verimor.com.tr/sms_settings/edit adresinden belirlemeniz gerekir.

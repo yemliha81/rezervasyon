@@ -11,7 +11,7 @@
         <span class="xflex"><span class="lnr lnr-checkmark-circle"></span> Rezervasyon Kontrol</span> 
         <?php if($menu=='2_1'){echo '<i class="fa fa-chevron-right"></i>';}?>
     </a>
-    <a class="left-a <?php if($menu=='3'){echo 'active';}?>" href="<?php echo 'CUSTOMER_LIST';?>">
+    <a class="left-a <?php if($menu=='3'){echo 'active';}?>" href="<?php echo CUSTOMER_LIST;?>">
         <span class="xflex"><span class="lnr lnr-users"></span> Müşteriler</span> 
         <?php if($menu=='3'){echo '<i class="fa fa-chevron-right"></i>';}?>
     </a>

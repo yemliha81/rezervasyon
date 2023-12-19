@@ -16,6 +16,14 @@ class Customer extends CI_Controller {
             redirect(LOGIN);
         }
     }
+
+	public function customer_list(){
+		$data['page'] = 1;
+		$data['customers'] = $this->db->select('*')
+			->get('customer_table')->result_array();
+		
+		$this->load->view('customer/customer_list_view', $data);
+	}
     
 	public function save_customer_post()
 	{
@@ -38,9 +46,6 @@ class Customer extends CI_Controller {
 		}
 
 		echo 'error';
-
-
-
 	}
 	
 }
