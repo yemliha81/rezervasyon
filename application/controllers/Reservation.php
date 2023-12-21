@@ -17,19 +17,47 @@ class Reservation extends CI_Controller {
         }
     }
 
+    public function latest_reservation_list()
+	{
+        $data['page'] = $_GET['page'] ?? 1;
+	    
+		$count = $this->db->count_all_results('reservation_table');
+		
+		$plus = (($count % 20)>0) ? 1 : 0;
+		
+		$data['total'] = (($count - ($count % 20) ) / 20)+$plus;
+		
+		$data['reservations'] = $this->db->select('*')
+		    ->limit(20, (($data['page']-1)*20))
+            ->where('start >', date('Y-m-d', time()))
+            ->where('start <', date('Y-m-d', time()+86400))
+            ->join("customer_table", "reservation_table.customer_id = customer_table.id", "left")
+			->get('reservation_table')->result_array();
+			
+		$data['menu'] = '2';
+			
+		$this->load->view('reservation/latest_reservation_list_view', $data);
+	}
+
     public function reservation_list()
 	{
-	    $data['menu'] = '2';
-
-        
-        
-        $data['res_data'] = $this->db->select('reservation_table.id, full_name as title, start, end')
-            ->get('reservation_table')->result_array();
-        
-        $data['events'] = json_encode($data['res_data']);
+        $data['page'] = $_GET['page'] ?? 1;
 	    
+		$count = $this->db->count_all_results('reservation_table');
+		
+		$plus = (($count % 20)>0) ? 1 : 0;
+		
+		$data['total'] = (($count - ($count % 20) ) / 20)+$plus;
+		
+		$data['reservations'] = $this->db->select('*')
+		    ->limit(20, (($data['page']-1)*20))
+            ->order_by('reservation_table.id', 'DESC')
+            ->join("customer_table", "reservation_table.customer_id = customer_table.id", "left")
+			->get('reservation_table')->result_array();
 			
-		$this->load->view('reservation/calendar_view', $data);
+		$data['menu'] = '2';
+			
+		$this->load->view('reservation/reservation_list_view', $data);
 	}
     
 	public function calendar()
@@ -92,7 +120,7 @@ class Reservation extends CI_Controller {
 			//echo 'success';
             $id = $this->db->insert_id();
 
-            $to = ($customer['gsm'][0]) == 0 ? "9".$customer['gsm'] : "90".$customer['gsm'];
+            $to = $customer['gsm'];
             //debug($to);
             $sms_text = "Sayın ".$customer['full_name'].", ".$this->date_format($post['start'])." tarihli ". $post['person'] . " kişilik rezervasyonunuz oluşturulmuştur. Detay için ".$_ENV['BASE_URL']."kurallar/".$id." adresini ziyaret edebilirsiniz.";
 
