@@ -16,6 +16,21 @@ class Reservation extends CI_Controller {
             redirect(LOGIN);
         }
     }
+
+    public function reservation_list()
+	{
+	    $data['menu'] = '2';
+
+        
+        
+        $data['res_data'] = $this->db->select('reservation_table.id, full_name as title, start, end')
+            ->get('reservation_table')->result_array();
+        
+        $data['events'] = json_encode($data['res_data']);
+	    
+			
+		$this->load->view('reservation/calendar_view', $data);
+	}
     
 	public function calendar()
 	{

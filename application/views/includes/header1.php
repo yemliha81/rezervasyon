@@ -359,6 +359,22 @@
         width: 1px;
         background: #ddd;
     }
+    .subMenu{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding-left: 55px;
+    }
+    .subMenuItem{}
+    .subMenuItem a{
+        color:#767676;
+        text-decoration:none;
+    }
+    .subMenuItem a:hover{
+        color:#000000;
+        text-decoration:none;
+        font-weight:bold;
+    }
 </style>
 </head>
 <body>

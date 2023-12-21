@@ -3,10 +3,21 @@
         <span class="xflex"><span class="lnr lnr-home"></span> Anasayfa</span> 
         <?php if($menu=='1'){echo '<i class="fa fa-chevron-right"></i>';}?>
     </a>
-    <a class="left-a <?php if($menu=='2'){echo 'active';}?>" href="<?php echo RESERVATION_CALENDAR;?>">
+    <a class="left-a <?php if($menu=='2'){echo 'active';}?>" href="javascript:;">
         <span class="xflex"><span class="lnr lnr-calendar-full"></span> Rezervasyon</span> 
         <?php if($menu=='2'){echo '<i class="fa fa-chevron-right"></i>';}?>
     </a>
+    <div class="subMenu">
+        <div class="subMenuItem">
+            <a href="<?php echo RESERVATION_CALENDAR;?>">Takvim</a>
+        </div>
+        <div class="subMenuItem">
+            <a href="<?php echo RESERVATION_CALENDAR;?>">Güncel Rezervasyonlar</a>
+        </div>
+        <div class="subMenuItem">
+            <a href="<?php echo RESERVATION_CALENDAR;?>">Tüm Rezervasyonlar</a>
+        </div>
+    </div>
     <a class="left-a <?php if($menu=='2_1'){echo 'active';}?>" href="<?php echo 'RESERVATION_CONTROL';?>">
         <span class="xflex"><span class="lnr lnr-checkmark-circle"></span> Rezervasyon Kontrol</span> 
         <?php if($menu=='2_1'){echo '<i class="fa fa-chevron-right"></i>';}?>
