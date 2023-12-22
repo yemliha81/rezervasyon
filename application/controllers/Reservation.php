@@ -12,13 +12,15 @@ class Reservation extends CI_Controller {
         if(empty($_SESSION['lang_array'])){
             $_SESSION['lang_array'] = array('tr', 'en');
         }
-        if(empty($_SESSION['admin_logged_in'])){
-            redirect(LOGIN);
-        }
+        
     }
 
     public function latest_reservation_list()
 	{
+        if(empty($_SESSION['admin_logged_in'])){
+            redirect(LOGIN);
+        }
+
         $data['page'] = $_GET['page'] ?? 1;
 		
 		$data['reservations'] = $this->db->select('*')
@@ -39,6 +41,10 @@ class Reservation extends CI_Controller {
 
     public function reservation_list()
 	{
+        if(empty($_SESSION['admin_logged_in'])){
+            redirect(LOGIN);
+        }
+
         $data['page'] = $_GET['page'] ?? 1;
 	    
 		$count = $this->db->count_all_results('reservation_table');
@@ -60,6 +66,10 @@ class Reservation extends CI_Controller {
     
 	public function calendar()
 	{
+        if(empty($_SESSION['admin_logged_in'])){
+            redirect(LOGIN);
+        }
+
 	    $data['menu'] = '2';
 
         $data['customers'] = $this->db->select('*')
@@ -95,6 +105,10 @@ class Reservation extends CI_Controller {
 
     public function save_reservation_post()
 	{
+        if(empty($_SESSION['admin_logged_in'])){
+            redirect(LOGIN);
+        }
+
         require DOC_ROOT . 'sms/Sms.php';
 	    
 	    $post = $this->input->post();
@@ -142,7 +156,10 @@ class Reservation extends CI_Controller {
 
 
     public function reservation_check(){
-        
+        if(empty($_SESSION['admin_logged_in'])){
+            redirect(LOGIN);
+        }
+
         $data = [];
 
 
@@ -150,7 +167,10 @@ class Reservation extends CI_Controller {
     }
 
     public function reservation_check_post($id){
-        
+        if(empty($_SESSION['admin_logged_in'])){
+            redirect(LOGIN);
+        }
+
        $result = $this->r_check_hash($id, md5($id));
 
        if($result != "error"){
@@ -161,6 +181,10 @@ class Reservation extends CI_Controller {
 
     public function r_check_hash($r_id, $md5){
         
+        if(empty($_SESSION['admin_logged_in'])){
+            redirect(LOGIN);
+        }
+
         if(md5($r_id) != $md5){
             die('Yetkisiz işlem');
         }
@@ -178,8 +202,6 @@ class Reservation extends CI_Controller {
     }
 
     public function r_customer_check_hash($r_id, $md5){
-
-        //debug(md5(10268));
         
         if(md5($r_id) != $md5){
             die('Yetkisiz işlem');
