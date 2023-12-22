@@ -115,6 +115,10 @@
       color: white !important;
       background: #035b34 !important;
     }
+    .fc-today {
+        background: rgba(0, 10, 78, 0.5) !important;
+        color: white !important;
+    }
     .customerList{
       max-height: 150px;
       overflow: auto;
@@ -247,18 +251,20 @@ $(document).ready(function() {
               
                 var start = moment(date).add(20, 'hours');
                 var end = moment(start).add(3, 'hours');
-                $('.modal').css('display', 'flex');
-                $('.start').val(moment(start).format('YYYY-MM-DD HH:mm'));
-                $('.end').val(moment(end).format('YYYY-MM-DD HH:mm'));
-
-                console.log(moment(start).format('YYYY-MM-DD HH:mm'))
+                if(start.isBefore(moment())) {
+                    $('#calendar').fullCalendar('unselect');
+                    return false;
+                }else{
+                  $('.modal').css('display', 'flex');
+                  $('.start').val(moment(start).format('YYYY-MM-DD HH:mm'));
+                  $('.end').val(moment(end).format('YYYY-MM-DD HH:mm'));
+                }
             },
-            // mobile day click open all day event
             eventDrop: function (event, delta, revertFunc) {
                 var start = moment(event.start).format('YYYY-MM-DD HH:mm');
                 var end = moment(event.end).format('YYYY-MM-DD HH:mm');
                 $.ajax({
-                    url: "includes/functions/reservation.php",
+                    url: "",
                     type: "POST",
                     data: {updateReservation: true, id: event.id, start: start, end: end},
                     success: function (data) {

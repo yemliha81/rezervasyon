@@ -20,12 +20,6 @@ class Reservation extends CI_Controller {
     public function latest_reservation_list()
 	{
         $data['page'] = $_GET['page'] ?? 1;
-	    
-		$count = $this->db->count_all_results('reservation_table');
-		
-		$plus = (($count % 20)>0) ? 1 : 0;
-		
-		$data['total'] = (($count - ($count % 20) ) / 20)+$plus;
 		
 		$data['reservations'] = $this->db->select('*')
 		    ->limit(20, (($data['page']-1)*20))
@@ -33,6 +27,10 @@ class Reservation extends CI_Controller {
             ->where('start <', date('Y-m-d', time()+86400))
             ->join("customer_table", "reservation_table.customer_id = customer_table.id", "left")
 			->get('reservation_table')->result_array();
+        
+        $count = count($data['reservations']);
+        $plus = (($count % 20)>0) ? 1 : 0;
+        $data['total'] = (($count - ($count % 20) ) / 20)+$plus;
 			
 		$data['menu'] = '2';
 			
@@ -107,6 +105,7 @@ class Reservation extends CI_Controller {
 
 		//debug($post);
 
+		
 		$ins['customer_id'] = $post['customer_id'];
 		$ins['person'] = $post['person'];
 		$ins['start'] = $post['start'];
@@ -119,10 +118,13 @@ class Reservation extends CI_Controller {
 		if($this->db->affected_rows() > 0){
 			//echo 'success';
             $id = $this->db->insert_id();
+            $r_id = 10250+$id;
+
+            $this->db->update('reservation_table', array('reservation_number' => $r_id), array('id' => $id));
 
             $to = $customer['gsm'];
             //debug($to);
-            $sms_text = "Sayın ".$customer['full_name'].", ".$this->date_format($post['start'])." tarihli ". $post['person'] . " kişilik rezervasyonunuz oluşturulmuştur. Detay için ".$_ENV['BASE_URL']."kurallar/".$id." adresini ziyaret edebilirsiniz.";
+            $sms_text = "Sayın ".$customer['full_name'].", ".$this->date_format($post['start'])." tarihli ". $post['person'] . " kişilik rezervasyonunuz oluşturulmuştur. Detay için ".$_ENV['BASE_URL']."kurallar/".$r_id."/".md5($r_id)." adresini ziyaret edebilirsiniz.";
 
             $sms = new Sms($to, $sms_text);
             $campaign_id = $sms->send_sms();
@@ -137,6 +139,63 @@ class Reservation extends CI_Controller {
         }
 
 	}
+
+
+    public function reservation_check(){
+        
+        $data = [];
+
+
+        $this->load->view('reservation/reservation_check_view', $data);
+    }
+
+    public function reservation_check_post($id){
+        
+       $result = $this->r_check_hash($id, md5($id));
+
+       if($result != "error"){
+        echo $result;
+       }
+
+    }
+
+    public function r_check_hash($r_id, $md5){
+        
+        if(md5($r_id) != $md5){
+            die('Yetkisiz işlem');
+        }
+
+        $check = $this->db->select('*')
+            ->join("customer_table", "reservation_table.customer_id = customer_table.id", "left")
+            ->where('reservation_table.reservation_number', $r_id)
+            ->get('reservation_table')->row_array();
+
+        if(!empty($check)){
+            return json_encode($check);
+        }else{
+            return "error";
+        }
+    }
+
+    public function r_customer_check_hash($r_id, $md5){
+
+        //debug(md5(10268));
+        
+        if(md5($r_id) != $md5){
+            die('Yetkisiz işlem');
+        }
+
+        $data['reservation'] = $this->db->select('*')
+            ->join("customer_table", "reservation_table.customer_id = customer_table.id", "left")
+            ->where('reservation_table.reservation_number', $r_id)
+            ->get('reservation_table')->row_array();
+
+        if(!empty($data['reservation'])){
+            $this->load->view('reservation/reservation_customer_check_view', $data);
+        }else{
+            echo "Rezervasyon Bulunamadı!";
+        }
+    }
 	
 	
 }

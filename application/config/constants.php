@@ -95,3 +95,7 @@ define( 'RESERVATION_CALENDAR', FATHER_BASE.'reservation/calendar/' );
 define( 'LATEST_RESERVATION_LIST', FATHER_BASE.'reservation/latest_reservation_list/' );
 define( 'RESERVATION_LIST', FATHER_BASE.'reservation/reservation_list/' );
 define( 'SAVE_RESERVATION_POST', FATHER_BASE.'reservation/save_reservation_post/' );
+define( 'RESERVATION_CHECK', FATHER_BASE.'reservation/reservation_check/' );
+define( 'RESERVATION_CHECK_POST', FATHER_BASE.'reservation/reservation_check_post/' );
+define( 'RESERVATION_CHECK_HASH', FATHER_BASE.'reservation/r_check_hash/' );
+define( 'RESERVATION_CUSTOMER_CHECK_HASH', FATHER_BASE.'reservation/r_customer_check_hash/' );
