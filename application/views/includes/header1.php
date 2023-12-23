@@ -381,7 +381,7 @@
     }
     @media screen and (max-width: 767px) {
         .top-bar{
-            grid-template-columns:170px auto;
+            grid-template-columns:130px auto;
         }
         .top-title{
             display:none;
