@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Yönetici Paneli</title>
+    <title><?php echo $_ENV['PROJECT_NAME'];?> Yönetici Paneli</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo FATHER_BASE;?>template/css/bootstrap.min.css" rel="stylesheet">

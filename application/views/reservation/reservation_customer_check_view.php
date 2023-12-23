@@ -77,6 +77,9 @@
             margin-bottom: 10px;
             border-radius: 10px;
         }
+        .canceled{
+            background:#b81313;
+        }
     </style>
 </head>
 <body>
@@ -85,26 +88,30 @@
             Rezervasyon Bilgileri
         </div>
         <div class="check_result" >
-            <div class="c_r">
-                <div>Rezervasyon ID:</div>
-                <div class="r_id"><?php echo $reservation['reservation_number'];?></div>
-            </div>
-            <div class="c_r">
-                <div>Rezervasyon Tarihi:</div>
-                <div class="r_date"><?php echo $reservation['start'];?></div>
-            </div>
-            <div class="c_r">
-                <div>Kişi Sayısı</div>
-                <div class="r_gsm"><?php echo $reservation['person'];?></div>
-            </div>
-            <div class="c_r">
-                <div>Adı Soyadı</div>
-                <div class="r_name"><?php echo $reservation['full_name'];?></div>
-            </div>
-            <div class="c_r">
-                <div>Telefon</div>
-                <div class="r_gsm"><?php echo $reservation['gsm'];?></div>
-            </div>
+            <?php if($reservation['is_deleted'] == 1){ ?>
+                <div class="c_r canceled">Rezervasyon İptal Edilmiştir!</div>
+            <?php }else{ ?>
+                <div class="c_r">
+                    <div>Rezervasyon ID:</div>
+                    <div class="r_id"><?php echo $reservation['reservation_number'];?></div>
+                </div>
+                <div class="c_r">
+                    <div>Rezervasyon Tarihi:</div>
+                    <div class="r_date"><?php echo $reservation['start'];?></div>
+                </div>
+                <div class="c_r">
+                    <div>Kişi Sayısı</div>
+                    <div class="r_gsm"><?php echo $reservation['person'];?></div>
+                </div>
+                <div class="c_r">
+                    <div>Adı Soyadı</div>
+                    <div class="r_name"><?php echo $reservation['full_name'];?></div>
+                </div>
+                <div class="c_r">
+                    <div>Telefon</div>
+                    <div class="r_gsm"><?php echo $reservation['gsm'];?></div>
+                </div>
+            <?php } ?>
         </div>
         
     </div>

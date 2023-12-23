@@ -31,6 +31,9 @@
             padding:30px;
             box-sizing:border-box;
             text-align:center;
+            display:flex;
+            flex-direction:column;
+            gap:30px;
         }
         .res_input{
             width: 100%;
@@ -77,12 +80,16 @@
             margin-bottom: 10px;
             border-radius: 10px;
         }
+        .project_name{
+            color: #666666
+        }
     </style>
 </head>
 <body>
     <div class="check_div">
         <div class="some_text">
-            Rezervasyon Kontrol Paneli
+            <div>Rezervasyon Kontrol Paneli</div>
+            <div class="project_name"><?php echo $_ENV['PROJECT_NAME'];?></div>
         </div>
         <div>
             <input type="text" name="" class="res_input" placeholder="Rezervasyon Numarası"/>

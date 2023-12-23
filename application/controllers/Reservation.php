@@ -133,7 +133,7 @@ class Reservation extends CI_Controller {
 
                 $to = $customer['gsm'];
                 //debug($to);
-                $sms_text = "Sayın ".$customer['full_name'].", ".$this->date_format($post['start'])." tarihli rezervasyonunuz iptal edilmiştir. Tekrar görüşmek dileğiyle.";
+                $sms_text = "Sayın ".$customer['full_name'].", ".$this->date_format($reservation['start'])." tarihli rezervasyonunuz iptal edilmiştir. Tekrar görüşmek dileğiyle.";
 
                 $sms = new Sms($to, $sms_text);
                 $sms->send_sms();
