@@ -27,6 +27,7 @@ class Reservation extends CI_Controller {
 		    ->limit(20, (($data['page']-1)*20))
             ->where('start >', date('Y-m-d', time()))
             ->where('start <', date('Y-m-d', time()+86400))
+            ->where('reservation_table.is_deleted', 0)
             ->join("customer_table", "reservation_table.customer_id = customer_table.id", "left")
 			->get('reservation_table')->result_array();
         
@@ -46,19 +47,17 @@ class Reservation extends CI_Controller {
         }
 
         $data['page'] = $_GET['page'] ?? 1;
-	    
-		$count = $this->db->count_all_results('reservation_table');
-		
-		$plus = (($count % 20)>0) ? 1 : 0;
-		
-		$data['total'] = (($count - ($count % 20) ) / 20)+$plus;
 		
 		$data['reservations'] = $this->db->select('*')
 		    ->limit(20, (($data['page']-1)*20))
+            ->where('reservation_table.is_deleted', 0)
             ->order_by('reservation_table.id', 'DESC')
             ->join("customer_table", "reservation_table.customer_id = customer_table.id", "left")
 			->get('reservation_table')->result_array();
-			
+        
+        $count = count($data['reservations']);
+        $plus = (($count % 20)>0) ? 1 : 0;
+        $data['total'] = (($count - ($count % 20) ) / 20)+$plus;
 		$data['menu'] = '2';
 			
 		$this->load->view('reservation/reservation_list_view', $data);
@@ -76,6 +75,7 @@ class Reservation extends CI_Controller {
             ->get('customer_table')->result_array();
         
         $data['res_data'] = $this->db->select('reservation_table.id, full_name as title, start, end')
+            ->where('reservation_table.is_deleted', 0)
             ->join("customer_table", "reservation_table.customer_id = customer_table.id", "left")
             ->get('reservation_table')->result_array();
         
@@ -101,6 +101,31 @@ class Reservation extends CI_Controller {
         );
         return datefmt_format($fmt,  $time)." ".$hour;
       
+    }
+
+    public function cancel_reservation(){
+        if(empty($_SESSION['admin_logged_in'])){
+            redirect(LOGIN);
+        }
+
+        require DOC_ROOT . 'sms/Sms.php';
+	    
+	    $post = $this->input->post();
+
+        try {
+            $this->db->trans_start();
+            $this->db->update('reservation_table', array('is_deleted' => 1), array('id' => $post['id']));
+            $this->db->trans_complete();
+
+            if ($this->db->trans_status() === FALSE)
+            {
+                echo "db error";
+            }else{
+                echo "success";
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     public function save_reservation_post()

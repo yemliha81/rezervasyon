@@ -225,6 +225,7 @@
 <script src="<?php echo FATHER_BASE;?>template/js/fullCalendar.js"></script>
 <script src="<?php echo FATHER_BASE;?>template/js/localeTr.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.jss"></script>
+<script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
 <script>
 
 $(document).ready(function() {
@@ -248,7 +249,6 @@ $(document).ready(function() {
                 });
             },
             dayClick: function (date) {
-              
                 var start = moment(date).add(20, 'hours');
                 var end = moment(start).add(3, 'hours');
                 if(start.isBefore(moment())) {
@@ -299,6 +299,36 @@ function hideCustomerForm(){
   $('.customerForm').addClass('hidden');
   $('.header2').addClass('hidden');
   $('.header1').removeClass('hidden');
+}
+
+function deleteConfirm(id){
+  swal({
+    title: "Emin misiniz?",
+    text: "Bu rezervasyonu silmek üzeresiniz!",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Sil",
+    cancelButtonText: "İptal",
+    closeOnConfirm: false,
+    closeOnCancel: true
+  },
+  function(isConfirm){
+      if (isConfirm) {
+
+        $.post('<?php echo CANCEL_RESERVATION;?>',
+              {"id":id},
+              function(data, status){
+                if(status=="success"){
+                  swal("İptal Edildi!", "Rezervasyon iptal edilmiştir.", "success");
+                  setTimeout(function(){
+                    location.reload()
+                  },1000)
+                  
+                }
+              });
+      }
+    });
 }
 
 function saveCustomer(){

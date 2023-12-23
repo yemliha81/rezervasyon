@@ -99,3 +99,4 @@ define( 'RESERVATION_CHECK', FATHER_BASE.'reservation/reservation_check/' );
 define( 'RESERVATION_CHECK_POST', FATHER_BASE.'reservation/reservation_check_post/' );
 define( 'RESERVATION_CHECK_HASH', FATHER_BASE.'reservation/r_check_hash/' );
 define( 'RESERVATION_CUSTOMER_CHECK_HASH', FATHER_BASE.'reservation/r_customer_check_hash/' );
+define( 'CANCEL_RESERVATION', FATHER_BASE.'reservation/cancel_reservation/' );

@@ -35,6 +35,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="<?php echo FATHER_BASE;?>template/fonts/icomoon/demo-files/demo.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
 	<style type="text/css">
 		body{
 			font-family: 'GilroyRegular', sans-serif;
