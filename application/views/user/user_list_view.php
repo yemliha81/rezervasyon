@@ -15,13 +15,13 @@
         grid-template-columns:50px 1fr 1fr;
         gap:20px;
         font-size: 16px;
-        color: #6666666;
+        color: #666666;
         font-weight: bold;
     }
     
     .m_img{
         border-radius: 50%;
-    overflow: hidden;
+        overflow: hidden;
     }
 </style>
 <div class="x-content">
@@ -69,7 +69,7 @@
 								<div class="conf">
 								
 								    <a class="configure" href="javascript:;" class="btn btn-xs btn-info">
-									<span class="lnr lnr-cog"></span> Düzenle
+									<span class="lnr lnr-cog"></span>
 									</a>
 									<a href="javascript:;" class="delete_menu" id="<?php echo $user['id'];?>">
 									    <span class="lnr lnr-trash"></span>

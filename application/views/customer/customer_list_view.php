@@ -53,7 +53,7 @@
 								<div class="conf">
 								
 								    <a class="configure" href="javascript:;" class="btn btn-xs btn-info">
-									<span class="lnr lnr-cog"></span> Düzenle
+									<span class="lnr lnr-cog"></span>
 									</a>
 									<a href="javascript:;" class="delete_menu" id="<?php echo $customer['id'];?>">
 									    <span class="lnr lnr-trash"></span>

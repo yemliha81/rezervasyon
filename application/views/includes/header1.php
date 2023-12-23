@@ -73,7 +73,7 @@
             align-items: center;
             gap: 20px;
             flex: auto;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
 		}
 		.search-div .search-input{
 		    width: 100%;
@@ -160,7 +160,7 @@
             justify-content: flex-end;
             position:relative;
 		}
-		.top-right:hover .logout{
+		.top-right .user-name:hover .top-right .logout{
 		    display:block;
 		}
 		.logout{
@@ -376,6 +376,59 @@
         text-decoration:none;
         font-weight:bold;
     }
+    @media screen and (max-width: 767px) {
+        .top-bar{
+            grid-template-columns:170px auto;
+        }
+        .top-title{
+            display:none;
+        }
+        .top-right{
+            margin-right:0;
+        }
+        .l-menu{
+            display:none;
+            margin:0;
+            padding:0;
+        }
+
+        .x-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            height: 100%;
+        }
+
+        .search-div{
+            display:none;
+        }
+        .menu-div{
+            grid-template-columns: auto 80px !important;
+        }
+        .menu-div .m-left{
+            grid-template-columns: 15px 1fr 1fr !important;
+            font-size:16px !important;
+        }
+        .configure, .delete_rest, .delete_menu{
+            padding:5px;
+            font-size:18px;
+        }
+        .nm{
+            font-size:15px;
+        }
+        .configure .lnr{
+            font-size:18px;
+        }
+        .user-icon{
+            display:none;
+        }
+        .menu-icon{
+            font-size:44px;
+        }
+        .charts{
+            grid-template-columns:1fr !important;
+        }
+    }
+}
 </style>
 </head>
 <body>
@@ -397,15 +450,18 @@
         
     </div>
     <div class="top-right">
-        <div>
+        <div class="user-icon">
             <span class="user fa fa-user"></span>
         </div>
-        <div>
+        <div class="user-name">
             <div class="nm"><?php echo $_SESSION['full_name'];?></div>
             <div class="spr">Admin</div>
         </div>
         <div class="logout">
             <a href="<?php echo LOGOUT;?>"><span>Çıkış</span> <i class="fa fa-chevron-right"></i></a>
+        </div>
+        <div class="menu-icon">
+            <span class="lnr lnr-menu"></span>
         </div>
     </div>
 </div>

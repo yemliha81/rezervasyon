@@ -16,6 +16,9 @@
     $('.menu_item').click(function(){
         $('.subMenu').slideToggle()
     })
+    $('.menu-icon').click(function(){
+        $('.l-menu').slideToggle()
+    })
 </script>
 </body>
 </html>
