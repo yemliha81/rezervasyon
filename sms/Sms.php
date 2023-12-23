@@ -26,8 +26,8 @@ class Sms{
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS =>'{
-            "username" : "908502422125", 
-            "password" : "968574", 
+            "username" : '.$_ENV['SMS_USERNAME'].', 
+            "password" : '.$_ENV['SMS_PASSWORD'].', 
             "messages" : {
                 "msg" : "'.$this->sms_text.'",
                 "dest" : "'.$this->to.'"
