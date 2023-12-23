@@ -89,6 +89,7 @@ define( 'LOGIN_POST', FATHER_BASE.'login/login_post/' );
 define( 'LOGOUT', FATHER_BASE.'login/logout/' );
 /* RESTAURANT URLS */
 
+define( 'USER_LIST', FATHER_BASE.'user/user_list/' );
 define( 'CUSTOMER_LIST', FATHER_BASE.'customer/customer_list/' );
 define( 'SAVE_CUSTOMER_POST', FATHER_BASE.'customer/save_customer_post/' );
 define( 'RESERVATION_CALENDAR', FATHER_BASE.'reservation/calendar/' );
