@@ -112,6 +112,14 @@ class Reservation extends CI_Controller {
 	    
 	    $post = $this->input->post();
 
+        $reservation = $this->db->select('*')
+            ->where('id', $post['id'])
+            ->get('reservation_table')->row_array();
+
+        $customer = $this->db->select('*')
+            ->where('id', $reservation['customer_id'])
+            ->get('customer_table')->row_array();
+
         try {
             $this->db->trans_start();
             $this->db->update('reservation_table', array('is_deleted' => 1), array('id' => $post['id']));
@@ -122,6 +130,13 @@ class Reservation extends CI_Controller {
                 echo "db error";
             }else{
                 echo "success";
+
+                $to = $customer['gsm'];
+                //debug($to);
+                $sms_text = "Sayın ".$customer['full_name'].", ".$this->date_format($post['start'])." tarihli rezervasyonunuz iptal edilmiştir. Tekrar görüşmek dileğiyle.";
+
+                $sms = new Sms($to, $sms_text);
+                $sms->send_sms();
             }
         } catch (\Throwable $th) {
             //throw $th;
