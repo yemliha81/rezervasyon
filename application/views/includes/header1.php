@@ -416,7 +416,7 @@
             font-size:18px;
         }
         .nm{
-            font-size:15px;
+            font-size:13px;
         }
         .configure .lnr{
             font-size:18px;
@@ -425,7 +425,7 @@
             display:none;
         }
         .menu-icon{
-            font-size:44px;
+            font-size:38px;
             display:inline-block;
         }
         .charts{
