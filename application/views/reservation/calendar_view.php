@@ -362,19 +362,28 @@ function saveReservation(){
   const person = $('.person').val();
   const start = $('.start').val();
   const end = $('.end').val();
-  $.ajax({
-      url: "<?php echo SAVE_RESERVATION_POST;?>",
-      type: "POST",
-      data: {customer_id: customer_id, person: person, start: start, end: end},
-      success: function (response) {
-        //location.reload();
-        if(response == 'success'){
-          location.reload();
-        }else{
-          alert('Hata oluştu!')
+  if(parseInt(customer_id) > 0){
+    $.ajax({
+        url: "<?php echo SAVE_RESERVATION_POST;?>",
+        type: "POST",
+        data: {customer_id: customer_id, person: person, start: start, end: end},
+        success: function (response) {
+          //location.reload();
+          if(response == 'success'){
+            location.reload();
+          }else{
+            alert('Hata oluştu!')
+          }
         }
-      }
-  })
+    })
+  }else{
+    swal({
+      title: "Kullanıcı Seçilmedi",
+      text: "Lütfen listeden bir kullanıcı seçiniz!",
+      type: "warning"
+    })
+  }
+  
 }
 
 $(document).on('change','.customer_id', function(){
