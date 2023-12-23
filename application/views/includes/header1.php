@@ -376,6 +376,9 @@
         text-decoration:none;
         font-weight:bold;
     }
+    .menu-icon{
+        display:none;
+    }
     @media screen and (max-width: 767px) {
         .top-bar{
             grid-template-columns:170px auto;
@@ -423,6 +426,7 @@
         }
         .menu-icon{
             font-size:44px;
+            display:inline-block;
         }
         .charts{
             grid-template-columns:1fr !important;
