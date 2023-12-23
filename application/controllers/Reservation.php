@@ -178,7 +178,7 @@ class Reservation extends CI_Controller {
 
             $to = $customer['gsm'];
             //debug($to);
-            $sms_text = "Sayın ".$customer['full_name'].", ".$this->date_format($post['start'])." tarihli ". $post['person'] . " kişilik rezervasyonunuz oluşturulmuştur. Detay için ".$_ENV['BASE_URL']."kurallar/".$r_id."/".md5($r_id)." adresini ziyaret edebilirsiniz.";
+            $sms_text = "Sayın ".$customer['full_name'].", ".$_ENV['PROJECT_NAME']." için ".$this->date_format($post['start'])." tarihli ". $post['person'] . " kişilik rezervasyonunuz oluşturulmuştur. Detay için ".$_ENV['BASE_URL']."kurallar/".$r_id."/".md5($r_id)." adresini ziyaret edebilirsiniz.";
 
             $sms = new Sms($to, $sms_text);
             $campaign_id = $sms->send_sms();
