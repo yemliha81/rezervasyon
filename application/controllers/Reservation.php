@@ -215,6 +215,8 @@ class Reservation extends CI_Controller {
 
        if($result != "error"){
         echo $result;
+       }else{
+        echo "not_found";
        }
 
     }

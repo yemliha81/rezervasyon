@@ -83,6 +83,9 @@
         .project_name{
             color: #666666
         }
+        .canceled{
+            background:#b81313;
+        }
     </style>
 </head>
 <body>
@@ -98,6 +101,7 @@
             <a class="check_btn" href="javascript:;">Kontrol Et</a>
         </div>
         <div class="check_result" style="display:none;">
+            <div class="c_r canceled" style="display:none;">Rezervasyon İptal Edilmiştir!</div>
             <div class="c_r">
                 <div>Rezervasyon ID:</div>
                 <div class="r_id"></div>
@@ -129,12 +133,22 @@
             $.get("<?php echo RESERVATION_CHECK_POST;?>"+id,
             function(data, status){
                 if(status == "success"){
-                    const dt = JSON.parse(data);
-                    $('.r_id').text(dt.reservation_number);
-                    $('.r_date').text(moment(dt.start).format('YYYY-MM-DD HH:mm'));
-                    $('.r_name').text(dt.full_name);
-                    $('.r_gsm').text(dt.gsm);
-                    $('.check_result').fadeIn()
+
+                    if(data == "not_found"){
+                        alert('Böyle bir rezervasyon bulunamadı!');
+                    }else{
+                        const dt = JSON.parse(data);
+                        $('.r_id').text(dt.reservation_number);
+                        $('.r_date').text(moment(dt.start).format('YYYY-MM-DD HH:mm'));
+                        $('.r_name').text(dt.full_name);
+                        $('.r_gsm').text(dt.gsm);
+                        $('.check_result').fadeIn()
+                        if(dt.is_deleted == "1"){
+                            $('.canceled').show()
+                        }else{
+                            $('.canceled').hide()
+                        }
+                    }
                 }
             });
         }
