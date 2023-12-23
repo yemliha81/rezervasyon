@@ -405,7 +405,7 @@
             display:none;
         }
         .menu-div{
-            grid-template-columns: auto 80px !important;
+            /*grid-template-columns: auto 80px !important;*/
         }
         .menu-div .m-left{
             grid-template-columns: 15px 1fr 1fr !important;
@@ -430,6 +430,9 @@
         }
         .charts{
             grid-template-columns:1fr !important;
+        }
+        .r_ttl .ttl{
+            font-size:16px;
         }
     }
 }
