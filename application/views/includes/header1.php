@@ -449,7 +449,7 @@
             padding:10px;
         }
         .modalInner{
-            height: 90dvh;
+            max-height:500px;
             overflow: auto;
         }
     }

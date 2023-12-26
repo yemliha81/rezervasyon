@@ -55,7 +55,7 @@
       overflow:auto;
       position:relative;
       z-index: 1;
-      max-height:500px;
+      
     }
     .modalContent{
       padding:20px;
