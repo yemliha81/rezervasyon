@@ -440,6 +440,10 @@
         .page-content{
             padding:10px;
         }
+        .modalInner{
+            height: 90dvh;
+            overflow: auto;
+        }
     }
 }
 </style>
