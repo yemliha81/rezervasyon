@@ -15,7 +15,7 @@
             <a href="<?php echo LATEST_RESERVATION_LIST;?>">Güncel Rezervasyonlar</a>
         </div>
         <div class="subMenuItem">
-            <a href="<?php echo RESERVATION_LIST;?>">Tüm Rezervasyonlar</a>
+            <a href="<?php echo RESERVATION_LIST;?>">Geçmiş Rezervasyonlar</a>
         </div>
     </div>
     <a class="left-a <?php if($menu=='2_1'){echo 'active';}?>" href="<?php echo RESERVATION_CHECK;?>">

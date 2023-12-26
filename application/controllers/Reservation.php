@@ -15,21 +15,37 @@ class Reservation extends CI_Controller {
         
     }
 
-    public function latest_reservation_list()
+    public function latest_reservation_list($date=NULL)
 	{
         if(empty($_SESSION['admin_logged_in'])){
             redirect(LOGIN);
         }
 
         $data['page'] = $_GET['page'] ?? 1;
+
+        //debug($date);
+
+        if($date == NULL){
+            $data['reservations'] = $this->db->select('*')
+                ->limit(20, (($data['page']-1)*20))
+                ->where('start >', date('Y-m-d', time()))
+                ->where('start <', date('Y-m-d', time()+(86400*2)))
+                ->where('reservation_table.is_deleted', 0)
+                ->join("customer_table", "reservation_table.customer_id = customer_table.id", "left")
+                ->get('reservation_table')->result_array();
+        }else{
+            $time = strtotime($date);
+            $data['reservations'] = $this->db->select('*')
+                ->limit(20, (($data['page']-1)*20))
+                ->where('start >', date('Y-m-d', $time))
+                ->where('start <', date('Y-m-d', $time+(86400*1)))
+                ->where('reservation_table.is_deleted', 0)
+                ->join("customer_table", "reservation_table.customer_id = customer_table.id", "left")
+                ->get('reservation_table')->result_array();
+        }
+
+        
 		
-		$data['reservations'] = $this->db->select('*')
-		    ->limit(20, (($data['page']-1)*20))
-            ->where('start >', date('Y-m-d', time()))
-            ->where('start <', date('Y-m-d', time()+(86400*2)))
-            ->where('reservation_table.is_deleted', 0)
-            ->join("customer_table", "reservation_table.customer_id = customer_table.id", "left")
-			->get('reservation_table')->result_array();
         
         $count = count($data['reservations']);
         $plus = (($count % 20)>0) ? 1 : 0;
@@ -50,6 +66,7 @@ class Reservation extends CI_Controller {
 		
 		$data['reservations'] = $this->db->select('*')
 		    ->limit(20, (($data['page']-1)*20))
+            ->where('start <', date('Y-m-d', time()))
             ->where('reservation_table.is_deleted', 0)
             ->order_by('reservation_table.id', 'DESC')
             ->join("customer_table", "reservation_table.customer_id = customer_table.id", "left")
@@ -72,6 +89,7 @@ class Reservation extends CI_Controller {
 	    $data['menu'] = '2';
 
         $data['customers'] = $this->db->select('*')
+            ->where('is_deleted', 0)
             ->get('customer_table')->result_array();
         
         $data['res_data'] = $this->db->select('reservation_table.id, full_name as title, start, end')

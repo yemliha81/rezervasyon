@@ -129,6 +129,10 @@
     .fc-scroller{
       height:100% !important;
     }
+    .past-event{
+      background:#dc3545;
+      border-color:#dc3545;
+    }
 </style>
 <div class="x-content">
     <?php include(APPPATH.'views/includes/left_nav1.php');?>
@@ -248,6 +252,20 @@ $(document).ready(function() {
             events: <?php echo $events;?>,
 
             eventRender: function (event, element) {
+              var ntoday = new Date().getTime();
+              var eventEnd = moment( event.end ).valueOf();
+              var eventStart = moment( event.start ).valueOf();
+              if (!event.end){
+                  if (eventStart < ntoday){
+                      element.addClass("past-event");
+                      element.children().addClass("past-event");
+                  }
+              } else {
+                  if (eventEnd < ntoday){
+                      element.addClass("past-event");
+                      element.children().addClass("past-event");
+                  }
+              }
                 element.attr('href', 'javascript:void(0);');
                 element.click(function () {
                     deleteConfirm(event.id)

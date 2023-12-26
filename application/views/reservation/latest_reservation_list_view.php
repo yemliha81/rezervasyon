@@ -41,6 +41,10 @@
 					    <div class="top-ttl">
     							<div class="r_ttl" >
     								<div class="ttl">Güncel Rezervasyonlar Listesi</div>
+                                    <span>
+                                        <input type="date" class="date_input" style="margin-right:10px;">
+                                        <button style="margin-right:20px;" onclick="filterResults()">Ara</button>
+                                    </span>
     							</div>
     							
     						</div>
@@ -90,5 +94,8 @@
 <?php include(APPPATH.'views/includes/footer.php');?>
 <script>
 
-   
+   function filterResults(){
+        const date = $('.date_input').val();
+        window.location.href = '<?php echo LATEST_RESERVATION_LIST;?>'+date;
+   }
 </script>
