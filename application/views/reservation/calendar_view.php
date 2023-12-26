@@ -52,9 +52,10 @@
       background:#FFFFFF;
       width:320px;
       border-radius:10px;
-      overflow:hidden;
+      overflow:auto;
       position:relative;
       z-index: 1;
+      max-height:500px;
     }
     .modalContent{
       padding:20px;
@@ -259,7 +260,7 @@ $(document).ready(function() {
                     $('#calendar').fullCalendar('unselect');
                     return false;
                 }else{
-                  $('.modal').css('display', 'flex');
+                  openModal();
                   $('.start').val(moment(start).format('YYYY-MM-DD HH:mm'));
                   $('.end').val(moment(end).format('YYYY-MM-DD HH:mm'));
                 }
@@ -286,12 +287,12 @@ $(document).ready(function() {
 
 function openModal(){
   $('.modal').css('display', 'flex');
-  $('modal').css('overflow', 'hidden');
+  $('body').css('overflow', 'hidden');
 }
 
 function closeModal(){
   $('.modal').fadeOut();
-  $('modal').css('overflow', 'unset');
+  $('body').css('overflow', 'unset');
 }
 
 function showCustomerForm(){

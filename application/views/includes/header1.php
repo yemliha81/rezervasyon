@@ -10,7 +10,7 @@
     <title><?php echo $_ENV['PROJECT_NAME'];?> Yönetici Paneli</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="<?php echo FATHER_BASE;?>template/css/bootstrap.min.css" rel="stylesheet">
+   <link href="<?php echo FATHER_BASE;?>template/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
     <link href="<?php echo FATHER_BASE;?>template/css/metisMenu.min.css" rel="stylesheet">
@@ -44,6 +44,9 @@
 		a{
 		    text-decoration:none !important;
 		}
+        div{
+            box-sizing:border-box;
+        }
 		.page{
 		    border: 1px solid #ce2c45;
             width: 25px;
@@ -128,6 +131,7 @@
             gap: 10px;
             color: #767676;
             justify-content: space-between;
+            box-sizing: border-box;
 		}
 		.menu-title{
 		    font-size:20px;
@@ -309,9 +313,10 @@
     }
     .welcome-div{
         display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 38px;
+        flex-direction: column;
+        align-items: center;
+        font-size: 38px;
+        width:100%;
     }
     .add-form{
         display: grid;

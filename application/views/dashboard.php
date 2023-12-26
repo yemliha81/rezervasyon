@@ -4,6 +4,7 @@
         display:grid;
         grid-template-columns: 1fr 1fr 1fr;
         gap:20px;
+        width:100%;
     }
 </style>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
