@@ -437,6 +437,9 @@
         .card{
             padding:7px !important;
         }
+        .page-content{
+            padding:10px;
+        }
     }
 }
 </style>
