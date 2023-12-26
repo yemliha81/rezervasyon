@@ -286,10 +286,12 @@ $(document).ready(function() {
 
 function openModal(){
   $('.modal').css('display', 'flex');
+  $('modal').css('overflow', 'hidden');
 }
 
 function closeModal(){
   $('.modal').fadeOut();
+  $('modal').css('overflow', 'unset');
 }
 
 function showCustomerForm(){
