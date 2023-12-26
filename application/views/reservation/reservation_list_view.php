@@ -36,7 +36,7 @@
     <div class="page-content">
         
         <div class="main-content m-t-20">
-            <div>
+            <div style="overflow:auto;">
 					<div class="rests">
 					    <div class="top-ttl">
     							<div class="r_ttl" >
