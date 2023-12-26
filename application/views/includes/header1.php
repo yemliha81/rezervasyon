@@ -434,6 +434,9 @@
         .r_ttl .ttl{
             font-size:16px;
         }
+        .card{
+            padding:7px !important;
+        }
     }
 }
 </style>
@@ -446,7 +449,7 @@
     <div style="text-align:center;">
         <div>
             <a class="" href="<?php echo FATHER_BASE;?>">
-                <img src="<?php echo FATHER_BASE;?>template/img/<?php echo $_ENV['LOGO_IMG_NAME'];?>" width="100%"/>
+                <img src="<?php echo FATHER_BASE;?>assets/img/logo-black.png" width="80%"/>
             </a>
         </div>
     </div>

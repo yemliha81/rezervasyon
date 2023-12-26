@@ -58,7 +58,7 @@
             <div class="welcome-div">
                 <form action="<?php echo LOGIN_POST;?>" method="post">
                     <div style="margin-bottom:30px">
-                        <img src="<?php echo FATHER_BASE;?>template/img/<?php echo $_ENV['LOGO_IMG_NAME'];?>" width="100%"/>
+                        <img src="<?php echo FATHER_BASE;?>assets/img/logo-black.png" width="100%"/>
                     </div>
                     <div class="welcome-msg">
                         <div>

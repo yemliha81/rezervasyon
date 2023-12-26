@@ -61,7 +61,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="navbar-header">
             <a class="navbar-brand" href="<?php echo FATHER_BASE;?>">
-                <img src="<?php echo FATHER_BASE;?>template/img/<?php echo $_ENV['LOGO_IMG_NAME'];?>" width="100px"/>
+                <img src="<?php echo FATHER_BASE;?>assets/img/logo.png" width="100px"/>
             </a>
         </div>
 

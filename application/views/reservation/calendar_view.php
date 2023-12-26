@@ -50,7 +50,7 @@
       display:flex;
       flex-direction:column;
       background:#FFFFFF;
-      width:350px;
+      width:320px;
       border-radius:10px;
       overflow:hidden;
       position:relative;
@@ -125,6 +125,9 @@
       background: #f3f3f3;
       padding: 5px;
     }
+    .fc-scroller{
+      height:100% !important;
+    }
 </style>
 <div class="x-content">
     <?php include(APPPATH.'views/includes/left_nav1.php');?>
@@ -166,6 +169,7 @@
       <div>Kişi Sayısı</div>
       <div>
         <select class="inp person" name="person" id="">
+          <option value="">Seçiniz</option>
           <?php for($i=1; $i<=20; $i++){ ?>
             <option value="<?php echo $i;?>"><?php echo $i;?></option>
           <?php } ?>
