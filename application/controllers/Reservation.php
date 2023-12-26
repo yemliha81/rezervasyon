@@ -26,7 +26,7 @@ class Reservation extends CI_Controller {
 		$data['reservations'] = $this->db->select('*')
 		    ->limit(20, (($data['page']-1)*20))
             ->where('start >', date('Y-m-d', time()))
-            ->where('start <', date('Y-m-d', time()+86400))
+            ->where('start <', date('Y-m-d', time()+(86400*2)))
             ->where('reservation_table.is_deleted', 0)
             ->join("customer_table", "reservation_table.customer_id = customer_table.id", "left")
 			->get('reservation_table')->result_array();

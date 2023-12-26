@@ -22,6 +22,7 @@ class Customer extends CI_Controller {
 		$data['total'] = 1;
 		$data['page'] = 1;
 		$data['customers'] = $this->db->select('*')
+			->where('is_deleted', 0)
 			->get('customer_table')->result_array();
 		
 		$this->load->view('customer/customer_list_view', $data);
@@ -48,6 +49,59 @@ class Customer extends CI_Controller {
 		}
 
 		echo 'error';
+	}
+
+	public function update_customer($id)
+	{
+		$data['menu'] = '3';
+		$data['customer'] = $this->db->select('*')
+			->where('id', $id)
+			->get('customer_table')->row_array();
+		
+		$this->load->view('customer/update_customer_view.php', $data);
+	}
+
+	public function update_customer_post()
+	{
+		$post = $this->input->post();
+
+		//debug($post);
+
+		$upd['full_name'] = $post['full_name'];
+		$upd['gsm'] = $post['gsm'];
+		$upd['email'] = $post['email'];
+		$upd['birthday'] = $post['birthday'];
+		$upd['gender'] = $post['gender'];
+
+		try {
+			$this->db->update('customer_table', $upd, array('id' => $post['id']));
+
+			if($this->db->affected_rows() > 0){
+				redirect(CUSTOMER_LIST);
+			}
+		} catch (\Throwable $th) {
+			throw $th;
+		}
+		
+		
+	}
+
+	public function delete_customer(){
+		$post = $this->input->post();
+
+		//debug($post);
+
+		$upd['is_deleted'] = 1;
+
+		try {
+			$this->db->update('customer_table', $upd, array('id' => $post['id']));
+
+			if($this->db->affected_rows() > 0){
+				echo "success"; die();
+			}
+		} catch (\Throwable $th) {
+			throw $th;
+		}
 	}
 	
 }

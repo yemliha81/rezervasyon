@@ -436,6 +436,9 @@
         .charts{
             grid-template-columns:1fr !important;
         }
+        .totals{
+            grid-template-columns:1fr !important;
+        }
         .r_ttl .ttl{
             font-size:16px;
         }

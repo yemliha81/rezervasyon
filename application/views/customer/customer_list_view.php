@@ -52,8 +52,8 @@
 								
 								<div class="conf">
 								
-								    <a class="configure" href="javascript:;" class="btn btn-xs btn-info">
-									<span class="lnr lnr-cog"></span>
+								    <a class="configure" href="<?php echo UPDATE_CUSTOMER.$customer['id'];?>" class="btn btn-xs btn-info">
+									    <span class="lnr lnr-cog"></span>
 									</a>
 									<a href="javascript:;" class="delete_menu" id="<?php echo $customer['id'];?>">
 									    <span class="lnr lnr-trash"></span>
@@ -78,69 +78,36 @@
 </div>
 
 <?php include(APPPATH.'views/includes/footer.php');?>
+<script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>   
 <script>
-    $('.delete_rest').click(function(){
-        if(confirm('Do you want to delete this restaurant?')){
-            var id = $(this).attr('id');
-        $.ajax({
-            context : $(this),
-            type : 'POST',
-            url : '<?php echo '';?>',
-            data : {'id' : id},
-            success : function(response){
-                console.log(response)
-                if(response == 'ok'){
-                    $(this).parent().parent().fadeOut();
-                }
-            }
-        })
-        }
-        
-    })
-    
     $('.delete_menu').click(function(){
-        if(confirm('BU HESABI SİLMEK İSTEDİĞİNİZDEN EMİN MİSİNİZ?')){
-            var id = $(this).attr('id');
-        $.ajax({
-            context : $(this),
-            type : 'POST',
-            url : '<?php echo DELETE_SOCIAL_MEDIA;?>',
-            data : {'id' : id},
-            success : function(response){
-                console.log(response)
-                if(response == 'ok'){
-                    $(this).parent().parent().fadeOut();
-                }
+        const id = $(this).attr('id'); 
+        swal({
+            title: "Emin misiniz?",
+            text: "Bu Müşteriyi silmek üzeresiniz!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Sil",
+            cancelButtonText: "İptal",
+            closeOnConfirm: false,
+            closeOnCancel: true
+        },
+        function(isConfirm){
+            if (isConfirm) {
+                $.post('<?php echo DELETE_CUSTOMER;?>',
+                    {"id":id},
+                    function(data, status){
+                        if(status=="success"){
+                        swal("Silindi!", "Müşteri silinmiştir.", "success");
+                        setTimeout(function(){
+                            location.reload()
+                        },1000)
+                        
+                        }
+                    });
             }
-        })
-        }
-        
-    })
-    $('.hide_page').click(function(){
-        
-            var id = $(this).attr('id');
-            var hidden = $(this).attr('is_hidden');
-            
-        $.ajax({
-            context : $(this),
-            type : 'POST',
-            url : '<?php echo HIDE_SOCIAL_MEDIA;?>',
-            data : {'id' : id,'hidden' : hidden},
-            success : function(response){
-                
-                if(hidden == '0'){
-                    console.log('close')
-                    $(this).addClass('bg_hidden');
-                    $(this).attr('is_hidden', '1');
-                }else{
-                    console.log('open')
-                    $(this).removeClass('bg_hidden');
-                    $(this).attr('is_hidden', '0');
-                }
-                
-            }
-        })
-        
+        });
         
     })
 </script>

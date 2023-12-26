@@ -91,6 +91,9 @@ define( 'LOGOUT', FATHER_BASE.'login/logout/' );
 
 define( 'USER_LIST', FATHER_BASE.'user/user_list/' );
 define( 'CUSTOMER_LIST', FATHER_BASE.'customer/customer_list/' );
+define( 'UPDATE_CUSTOMER', FATHER_BASE.'customer/update_customer/' );
+define( 'UPDATE_CUSTOMER_POST', FATHER_BASE.'customer/update_customer_post/' );
+define( 'DELETE_CUSTOMER', FATHER_BASE.'customer/delete_customer/' );
 define( 'SAVE_CUSTOMER_POST', FATHER_BASE.'customer/save_customer_post/' );
 define( 'RESERVATION_CALENDAR', FATHER_BASE.'reservation/calendar/' );
 define( 'LATEST_RESERVATION_LIST', FATHER_BASE.'reservation/latest_reservation_list/' );
