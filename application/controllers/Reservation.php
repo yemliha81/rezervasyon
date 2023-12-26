@@ -181,7 +181,7 @@ class Reservation extends CI_Controller {
 		$ins['customer_id'] = $post['customer_id'];
 		$ins['person'] = $post['person'];
 		$ins['start'] = $post['start'];
-		$ins['end'] = $post['end'];
+		$ins['end'] = explode('T',$post['start'])[0].'T'.$post['end'];
 
         //debug($this->date_format($post['start']));
 

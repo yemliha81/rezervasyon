@@ -186,7 +186,7 @@
       </div>
       <div>Bitiş</div>
       <div>
-        <input class="inp end" type="datetime-local">
+        <input class="inp end" type="time">
       </div>
       <div>
         <a class="small-btn bg-blue" href="javascript:;" onclick="saveReservation()">Ekle</a> <a class="small-btn bg-gray" href="javascript:;" onclick="closeModal()">Kapat</a>
@@ -280,7 +280,7 @@ $(document).ready(function() {
                 }else{
                   openModal();
                   $('.start').val(moment(start).format('YYYY-MM-DD HH:mm'));
-                  $('.end').val(moment(end).format('YYYY-MM-DD HH:mm'));
+                  $('.end').val(moment(end).format('HH:mm'));
                 }
             },
             eventDrop: function (event, delta, revertFunc) {
