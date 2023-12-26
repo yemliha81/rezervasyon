@@ -273,7 +273,7 @@
         margin-bottom: 20px;
         margin-left: -30px;
         margin-right: -30px;
-        padding: 0 20px 20px 20px;
+        padding: 0 20px 20px 30px;
     }
     .r_ttl{
         font-size: 24px;
