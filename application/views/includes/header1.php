@@ -242,6 +242,8 @@
         display:flex;
         flex-direction:column;
         gap:20px;
+        min-width:600px;
+        overflow:hidden;
     }
     .r_zone{
         display: flex;
@@ -385,6 +387,10 @@
         display:none;
     }
     @media screen and (max-width: 767px) {
+        .main-content{
+            padding:15px;
+            overflow:hidden;
+        }
         .top-bar{
             grid-template-columns:130px auto;
         }

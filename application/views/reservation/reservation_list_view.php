@@ -27,7 +27,7 @@
     }
     .m_img{
         border-radius: 50%;
-    overflow: hidden;
+        overflow: hidden;
     }
 </style>
 <div class="x-content">
