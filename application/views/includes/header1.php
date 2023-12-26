@@ -453,7 +453,6 @@
         }
         .page-content{
             padding:10px;
-            width:75%;
         }
         .modalInner{
             max-height:500px;
