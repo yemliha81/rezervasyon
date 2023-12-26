@@ -35,6 +35,7 @@
 					    <div class="top-ttl">
     							<div class="r_ttl" >
     								<div class="ttl">Kullanıcı Listesi</div>
+									<a class="btn_custom" href="<?php echo ADD_USER;?>"><span class="lnr lnr-plus-circle"></span>Yeni Kullanıcı</a>
     							</div>
     							
     						</div>
@@ -68,7 +69,7 @@
 								
 								<div class="conf">
 								
-								    <a class="configure" href="javascript:;" class="btn btn-xs btn-info">
+								    <a class="configure" href="<?php echo UPDATE_USER.$user['id'];?>" class="btn btn-xs btn-info">
 									<span class="lnr lnr-cog"></span>
 									</a>
 									<a href="javascript:;" class="delete_menu" id="<?php echo $user['id'];?>">
@@ -81,19 +82,43 @@
 							
 						</div>
 					</div>
-					<!--<div style='padding:20px;text-align:center;'>
-					    <?php for($i=1; $i<=$total; $i++){ ?>
-					    
-					        <a class='page <?php if($page == $i){ echo 'act'; }?>' href='<?php echo CUSTOMER_LIST.$c_id;?>?page=<?php echo $i;?>'><?php echo $i;?></a>
-					    
-					    <?php } ?>
-					</div>-->
 				</div>
         </div>
     </div>
 </div>
 
 <?php include(APPPATH.'views/includes/footer.php');?>
+<script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>   
+
 <script>
-    
+    $('.delete_menu').click(function(){
+        const id = $(this).attr('id'); 
+        swal({
+            title: "Emin misiniz?",
+            text: "Bu Kullanıcıyı silmek üzeresiniz!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Sil",
+            cancelButtonText: "İptal",
+            closeOnConfirm: false,
+            closeOnCancel: true
+        },
+        function(isConfirm){
+            if (isConfirm) {
+                $.post('<?php echo DELETE_USER;?>',
+                    {"id":id},
+                    function(data, status){
+                        if(status=="success"){
+                        swal("Silindi!", "Kullanıcı silinmiştir.", "success");
+                        setTimeout(function(){
+                            location.reload()
+                        },1000)
+                        
+                        }
+                    });
+            }
+        });
+        
+    })
 </script>

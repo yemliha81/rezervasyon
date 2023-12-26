@@ -272,9 +272,10 @@ $(document).ready(function() {
                 });
             },
             dayClick: function (date) {
+                var today = moment();
                 var start = moment(date).add(20, 'hours');
                 var end = moment(start).add(3, 'hours');
-                if(start.isBefore(moment())) {
+                if(start.isBefore(today)) {
                     $('#calendar').fullCalendar('unselect');
                     return false;
                 }else{

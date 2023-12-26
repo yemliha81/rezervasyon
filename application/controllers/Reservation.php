@@ -20,6 +20,9 @@ class Reservation extends CI_Controller {
         if(empty($_SESSION['admin_logged_in'])){
             redirect(LOGIN);
         }
+        if(($_SESSION['role'] == '2')){
+            redirect(RESERVATION_CHECK);
+        }
 
         $data['page'] = $_GET['page'] ?? 1;
 
@@ -61,6 +64,9 @@ class Reservation extends CI_Controller {
         if(empty($_SESSION['admin_logged_in'])){
             redirect(LOGIN);
         }
+        if(($_SESSION['role'] == '2')){
+            redirect(RESERVATION_CHECK);
+        }
 
         $data['page'] = $_GET['page'] ?? 1;
 		
@@ -84,6 +90,9 @@ class Reservation extends CI_Controller {
 	{
         if(empty($_SESSION['admin_logged_in'])){
             redirect(LOGIN);
+        }
+        if(($_SESSION['role'] == '2')){
+            redirect(RESERVATION_CHECK);
         }
 
 	    $data['menu'] = '2';
@@ -125,6 +134,9 @@ class Reservation extends CI_Controller {
         if(empty($_SESSION['admin_logged_in'])){
             redirect(LOGIN);
         }
+        if(($_SESSION['role'] == '2')){
+            redirect(RESERVATION_CHECK);
+        }
 
         require DOC_ROOT . 'sms/Sms.php';
 	    
@@ -165,6 +177,9 @@ class Reservation extends CI_Controller {
 	{
         if(empty($_SESSION['admin_logged_in'])){
             redirect(LOGIN);
+        }
+        if(($_SESSION['role'] == '2')){
+            redirect(RESERVATION_CHECK);
         }
 
         require DOC_ROOT . 'sms/Sms.php';

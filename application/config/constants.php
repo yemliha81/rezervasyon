@@ -90,6 +90,11 @@ define( 'LOGOUT', FATHER_BASE.'login/logout/' );
 /* RESTAURANT URLS */
 
 define( 'USER_LIST', FATHER_BASE.'user/user_list/' );
+define( 'ADD_USER', FATHER_BASE.'user/add_user/' );
+define( 'SAVE_USER_POST', FATHER_BASE.'user/save_user_post/' );
+define( 'UPDATE_USER', FATHER_BASE.'user/update_user/' );
+define( 'UPDATE_USER_POST', FATHER_BASE.'user/update_user_post/' );
+define( 'DELETE_USER', FATHER_BASE.'user/delete_user/' );
 define( 'CUSTOMER_LIST', FATHER_BASE.'customer/customer_list/' );
 define( 'UPDATE_CUSTOMER', FATHER_BASE.'customer/update_customer/' );
 define( 'UPDATE_CUSTOMER_POST', FATHER_BASE.'customer/update_customer_post/' );

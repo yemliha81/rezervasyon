@@ -9,6 +9,9 @@ public function __construct()
         if(empty($_SESSION['admin_logged_in'])){
             redirect(LOGIN);
         }
+        if(($_SESSION['role'] == '2')){
+            redirect(RESERVATION_CHECK);
+        }
     
     }
 	public function index()

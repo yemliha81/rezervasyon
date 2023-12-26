@@ -22,14 +22,21 @@ class Login extends CI_Controller {
 		$check = $this->db->select('*')
 		      ->where('username', $post['username'])
 		      ->where('password', md5($post['password']))
+		      ->where('is_deleted', 0)
 		      ->get('admin_table')->row_array();
 		 
 		//debug($check);
 		if(!empty($check)){
 		    $_SESSION['admin_logged_in'] = 1;
+		    $_SESSION['role'] = $check['role'];
 		    $_SESSION['full_name'] = $check['full_name'];
 			//debug($_SESSION);
-		    redirect($_ENV['BASE_URL']);
+
+			
+				redirect($_ENV['BASE_URL']);
+			
+
+		    
 		}else{
 		    $_SESSION['login_error'] = 1;
 		    redirect(LOGIN);
